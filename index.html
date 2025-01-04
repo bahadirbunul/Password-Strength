@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Strength Indicator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="input-box">
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+        />
+        <button type="submit"><img src="/images/arrow.png" alt="" /></button>
+        <p id="message"></p>
+      </div>
+    </div>
+
+    <script>
+      var password = document.getElementById("password");
+      var message = document.getElementById("message");
+
+      password.addEventListener("keyup", function () {
+        var password = document.getElementById("password").value;
+        var strengthBar = document.getElementById("strength");
+        var strength = 0;
+
+        if (password == "") {
+          message.innerHTML = "";
+        }
+
+        if (password.match(/[a-z]+/)) {
+          strength += 1;
+        }
+
+        if (password.match(/[A-Z]+/)) {
+          strength += 1;
+        }
+
+        if (password.match(/[0-9]+/)) {
+          strength += 1;
+        }
+
+        if (password.match(/[$@#&!]+/)) {
+          strength += 1;
+        }
+
+        if (password.length < 6) {
+          message.innerHTML = "Password is too short";
+          message.style.color = "red";
+        }
+
+        if (password.length > 6) {
+          message.innerHTML = "Password is weak";
+          message.style.color = "red";
+        }
+
+        if (password.length > 8) {
+          message.innerHTML = "Password is medium";
+          message.style.color = "orange";
+        }
+
+        if (password.length > 10) {
+          message.innerHTML = "Password is strong";
+          message.style.color = "green";
+        }
+      });
+    </script>
+  </body>
+</html>
